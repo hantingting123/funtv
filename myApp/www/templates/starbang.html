@@ -1,0 +1,32 @@
+<ion-view>
+  <ion-nav-buttons >
+    <button class="button button-icon ion-chevron-left" ng-click="goBack()"></button>
+  </ion-nav-buttons>
+  <ion-nav-title>明星榜</ion-nav-title>
+
+  <ion-content>
+
+    <style>
+      .isGuanzhu{
+        border: 1px grey solid;
+      }
+    </style>
+
+
+    <div class="list">
+
+      <a class="item item-avatar" ng-repeat="item in mine.hotstar "  >
+        <img src="{{item.thumb}}" ng-click="mine.starClick($index)">
+        <h2>{{item.name}}</h2>
+        <p>粉丝数:{{item.fansCount>10000?(item.fansCount/10000).toFixed(1)+"万":item.fansCount}}<button class="btn"  ng-class="{isGuanzhu:item.isFocus}"  ng-disabled="item.isFocus"  ng-click="mine.guanzhuClick($index,$event)"  style="float: right">{{item.textguanzhu}}</button></p>
+
+      </a>
+
+    </div>
+    <ion-infinite-scroll
+      on-infinite="loadMore()"
+      immediate-check="false"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+</ion-view>
